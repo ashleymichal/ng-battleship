@@ -10,6 +10,7 @@
  */
 angular
   .module('battleshipApp', [
+    'config',
     'ngAnimate',
     'ngCookies',
     'ngResource',
@@ -17,14 +18,17 @@ angular
     'ngSanitize',
     'ngTouch'
   ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+  .config(['$routeProvider', function ($routeProvider) {
+      $routeProvider
+        .when('/', {
+          templateUrl: 'views/games/new.html'
+        })
+        .when('/games/:id', {
+          templateUrl: 'views/games/show.html',
+          controller: 'GameCtrl',
+          controllerAs: 'game'
+        })
+        .otherwise({
+          redirectTo: '/'
+        });
+    }]);
